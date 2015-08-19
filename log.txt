@@ -1,0 +1,1227 @@
+protoc --proto_path=src/caffe/proto --cpp_out=.build_release/src/caffe/proto src/caffe/proto/caffe_pretty_print.proto
+
+protoc --proto_path=src/caffe/proto --cpp_out=.build_release/src/caffe/proto src/caffe/proto/caffe.proto
+
+g++ .build_release/src/caffe/proto/caffe_pretty_print.pb.cc -pthread -fPIC -DNDEBUG -O2 -DUSE_CUDNN -I/usr/local/include/python2.7 -I/usr/local/lib/python2.7/dist-packages/numpy/core/include -I/usr/local/include -I.build_release/src -I./src -I./include -I/usr/local/cuda/include -Wall -Wno-sign-compare -c -o .build_release/src/caffe/proto/caffe_pretty_print.pb.o 2> .build_release/src/caffe/proto/caffe_pretty_print.pb.o.warnings.txt \
+		|| (cat .build_release/src/caffe/proto/caffe_pretty_print.pb.o.warnings.txt; exit 1)
+
+g++ .build_release/src/caffe/proto/caffe.pb.cc -pthread -fPIC -DNDEBUG -O2 -DUSE_CUDNN -I/usr/local/include/python2.7 -I/usr/local/lib/python2.7/dist-packages/numpy/core/include -I/usr/local/include -I.build_release/src -I./src -I./include -I/usr/local/cuda/include -Wall -Wno-sign-compare -c -o .build_release/src/caffe/proto/caffe.pb.o 2> .build_release/src/caffe/proto/caffe.pb.o.warnings.txt \
+		|| (cat .build_release/src/caffe/proto/caffe.pb.o.warnings.txt; exit 1)
+
+g++ src/caffe/layer_factory.cpp -pthread -fPIC -DNDEBUG -O2 -DUSE_CUDNN -I/usr/local/include/python2.7 -I/usr/local/lib/python2.7/dist-packages/numpy/core/include -I/usr/local/include -I.build_release/src -I./src -I./include -I/usr/local/cuda/include -Wall -Wno-sign-compare -c -o .build_release/src/caffe/layer_factory.o 2> .build_release/src/caffe/layer_factory.o.warnings.txt \
+		|| (cat .build_release/src/caffe/layer_factory.o.warnings.txt; exit 1)
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp: In member function ‘virtual caffe::LayerParameter_LayerType caffe::PReLULayer<Dtype>::type() const’:
+./include/caffe/neuron_layers.hpp:625:11: error: ‘LayerParameter_LayerType_PRELU’ was not declared in this scope
+    return LayerParameter_LayerType_PRELU;
+           ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp: In member function ‘virtual caffe::LayerParameter_LayerType caffe::BNLayer<Dtype>::type() const’:
+./include/caffe/common_layers.hpp:86:11: error: ‘LayerParameter_LayerType_BN’ was not declared in this scope
+    return LayerParameter_LayerType_BN;
+           ^
+src/caffe/layer_factory.cpp: In function ‘caffe::Layer<Dtype>* caffe::GetLayer(const caffe::LayerParameter&)’:
+src/caffe/layer_factory.cpp:188:8: error: ‘LayerParameter_LayerType_BN’ was not declared in this scope
+   case LayerParameter_LayerType_BN:
+        ^
+src/caffe/layer_factory.cpp:236:8: error: ‘LayerParameter_LayerType_PRELU’ was not declared in this scope
+   case LayerParameter_LayerType_PRELU:
+        ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::ConvolutionLayer<Dtype>* caffe::GetConvolutionLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:35:32:   required from here
+src/caffe/layer_factory.cpp:24:45: error: cannot allocate an object of abstract type ‘caffe::ConvolutionLayer<float>’
+     return new ConvolutionLayer<Dtype>(param);
+                                             ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:26:7: note:   because the following virtual functions are pure within ‘caffe::ConvolutionLayer<float>’:
+ class ConvolutionLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:27:50: error: cannot allocate an object of abstract type ‘caffe::CuDNNConvolutionLayer<float>’
+     return new CuDNNConvolutionLayer<Dtype>(param);
+                                                  ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:72:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNConvolutionLayer<float>’:
+ class CuDNNConvolutionLayer : public ConvolutionLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::ConvolutionLayer<Dtype>* caffe::GetConvolutionLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:37:32:   required from here
+src/caffe/layer_factory.cpp:24:45: error: cannot allocate an object of abstract type ‘caffe::ConvolutionLayer<double>’
+     return new ConvolutionLayer<Dtype>(param);
+                                             ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:26:7: note:   because the following virtual functions are pure within ‘caffe::ConvolutionLayer<double>’:
+ class ConvolutionLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:27:50: error: cannot allocate an object of abstract type ‘caffe::CuDNNConvolutionLayer<double>’
+     return new CuDNNConvolutionLayer<Dtype>(param);
+                                                  ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:72:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNConvolutionLayer<double>’:
+ class CuDNNConvolutionLayer : public ConvolutionLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::PoolingLayer<Dtype>* caffe::GetPoolingLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:62:32:   required from here
+src/caffe/layer_factory.cpp:51:41: error: cannot allocate an object of abstract type ‘caffe::PoolingLayer<float>’
+     return new PoolingLayer<Dtype>(param);
+                                         ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:219:7: note:   because the following virtual functions are pure within ‘caffe::PoolingLayer<float>’:
+ class PoolingLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:54:46: error: cannot allocate an object of abstract type ‘caffe::CuDNNPoolingLayer<float>’
+     return new CuDNNPoolingLayer<Dtype>(param);
+                                              ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:264:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNPoolingLayer<float>’:
+ class CuDNNPoolingLayer : public PoolingLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::PoolingLayer<Dtype>* caffe::GetPoolingLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:64:32:   required from here
+src/caffe/layer_factory.cpp:51:41: error: cannot allocate an object of abstract type ‘caffe::PoolingLayer<double>’
+     return new PoolingLayer<Dtype>(param);
+                                         ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:219:7: note:   because the following virtual functions are pure within ‘caffe::PoolingLayer<double>’:
+ class PoolingLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:54:46: error: cannot allocate an object of abstract type ‘caffe::CuDNNPoolingLayer<double>’
+     return new CuDNNPoolingLayer<Dtype>(param);
+                                              ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:264:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNPoolingLayer<double>’:
+ class CuDNNPoolingLayer : public PoolingLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::ReLULayer<Dtype>* caffe::GetReLULayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:89:32:   required from here
+src/caffe/layer_factory.cpp:78:38: error: cannot allocate an object of abstract type ‘caffe::ReLULayer<float>’
+     return new ReLULayer<Dtype>(param);
+                                      ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:293:7: note:   because the following virtual functions are pure within ‘caffe::ReLULayer<float>’:
+ class ReLULayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:81:43: error: cannot allocate an object of abstract type ‘caffe::CuDNNReLULayer<float>’
+     return new CuDNNReLULayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:364:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNReLULayer<float>’:
+ class CuDNNReLULayer : public ReLULayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::ReLULayer<Dtype>* caffe::GetReLULayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:91:32:   required from here
+src/caffe/layer_factory.cpp:78:38: error: cannot allocate an object of abstract type ‘caffe::ReLULayer<double>’
+     return new ReLULayer<Dtype>(param);
+                                      ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:293:7: note:   because the following virtual functions are pure within ‘caffe::ReLULayer<double>’:
+ class ReLULayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:81:43: error: cannot allocate an object of abstract type ‘caffe::CuDNNReLULayer<double>’
+     return new CuDNNReLULayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:364:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNReLULayer<double>’:
+ class CuDNNReLULayer : public ReLULayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::SigmoidLayer<Dtype>* caffe::GetSigmoidLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:116:32:   required from here
+src/caffe/layer_factory.cpp:105:41: error: cannot allocate an object of abstract type ‘caffe::SigmoidLayer<float>’
+     return new SigmoidLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:393:7: note:   because the following virtual functions are pure within ‘caffe::SigmoidLayer<float>’:
+ class SigmoidLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:108:46: error: cannot allocate an object of abstract type ‘caffe::CuDNNSigmoidLayer<float>’
+     return new CuDNNSigmoidLayer<Dtype>(param);
+                                              ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:446:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNSigmoidLayer<float>’:
+ class CuDNNSigmoidLayer : public SigmoidLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::SigmoidLayer<Dtype>* caffe::GetSigmoidLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:118:32:   required from here
+src/caffe/layer_factory.cpp:105:41: error: cannot allocate an object of abstract type ‘caffe::SigmoidLayer<double>’
+     return new SigmoidLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:393:7: note:   because the following virtual functions are pure within ‘caffe::SigmoidLayer<double>’:
+ class SigmoidLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:108:46: error: cannot allocate an object of abstract type ‘caffe::CuDNNSigmoidLayer<double>’
+     return new CuDNNSigmoidLayer<Dtype>(param);
+                                              ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:446:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNSigmoidLayer<double>’:
+ class CuDNNSigmoidLayer : public SigmoidLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::TanHLayer<Dtype>* caffe::GetTanHLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:143:32:   required from here
+src/caffe/layer_factory.cpp:132:38: error: cannot allocate an object of abstract type ‘caffe::TanHLayer<float>’
+     return new TanHLayer<Dtype>(param);
+                                      ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:475:7: note:   because the following virtual functions are pure within ‘caffe::TanHLayer<float>’:
+ class TanHLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:135:43: error: cannot allocate an object of abstract type ‘caffe::CuDNNTanHLayer<float>’
+     return new CuDNNTanHLayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:530:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNTanHLayer<float>’:
+ class CuDNNTanHLayer : public TanHLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::TanHLayer<Dtype>* caffe::GetTanHLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:145:32:   required from here
+src/caffe/layer_factory.cpp:132:38: error: cannot allocate an object of abstract type ‘caffe::TanHLayer<double>’
+     return new TanHLayer<Dtype>(param);
+                                      ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:475:7: note:   because the following virtual functions are pure within ‘caffe::TanHLayer<double>’:
+ class TanHLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:135:43: error: cannot allocate an object of abstract type ‘caffe::CuDNNTanHLayer<double>’
+     return new CuDNNTanHLayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:530:7: note:   because the following virtual functions are pure within ‘caffe::CuDNNTanHLayer<double>’:
+ class CuDNNTanHLayer : public TanHLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::SoftmaxLayer<Dtype>* caffe::GetSoftmaxLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:170:32:   required from here
+src/caffe/layer_factory.cpp:159:41: error: cannot allocate an object of abstract type ‘caffe::SoftmaxLayer<float>’
+     return new SoftmaxLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:403:8: note:   because the following virtual functions are pure within ‘caffe::SoftmaxLayer<float>’:
+  class SoftmaxLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:162:46: error: cannot allocate an object of abstract type ‘caffe::CuDNNSoftmaxLayer<float>’
+     return new CuDNNSoftmaxLayer<Dtype>(param);
+                                              ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:438:8: note:   because the following virtual functions are pure within ‘caffe::CuDNNSoftmaxLayer<float>’:
+  class CuDNNSoftmaxLayer : public SoftmaxLayer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::SoftmaxLayer<Dtype>* caffe::GetSoftmaxLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:172:32:   required from here
+src/caffe/layer_factory.cpp:159:41: error: cannot allocate an object of abstract type ‘caffe::SoftmaxLayer<double>’
+     return new SoftmaxLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:403:8: note:   because the following virtual functions are pure within ‘caffe::SoftmaxLayer<double>’:
+  class SoftmaxLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:162:46: error: cannot allocate an object of abstract type ‘caffe::CuDNNSoftmaxLayer<double>’
+     return new CuDNNSoftmaxLayer<Dtype>(param);
+                                              ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:438:8: note:   because the following virtual functions are pure within ‘caffe::CuDNNSoftmaxLayer<double>’:
+  class CuDNNSoftmaxLayer : public SoftmaxLayer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::Layer<Dtype>* caffe::GetLayer(const caffe::LayerParameter&) [with Dtype = float]’:
+src/caffe/layer_factory.cpp:267:60:   required from here
+src/caffe/layer_factory.cpp:183:42: error: cannot allocate an object of abstract type ‘caffe::AccuracyLayer<float>’
+     return new AccuracyLayer<Dtype>(param);
+                                          ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:23:7: note:   because the following virtual functions are pure within ‘caffe::AccuracyLayer<float>’:
+ class AccuracyLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:185:40: error: cannot allocate an object of abstract type ‘caffe::AbsValLayer<float>’
+     return new AbsValLayer<Dtype>(param);
+                                        ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:50:7: note:   because the following virtual functions are pure within ‘caffe::AbsValLayer<float>’:
+ class AbsValLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:187:40: error: cannot allocate an object of abstract type ‘caffe::ArgMaxLayer<float>’
+     return new ArgMaxLayer<Dtype>(param);
+                                        ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:29:8: note:   because the following virtual functions are pure within ‘caffe::ArgMaxLayer<float>’:
+  class ArgMaxLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:189:35: error: cannot allocate an object of abstract type ‘caffe::BNLayer<float>’
+    return new BNLayer<Dtype>(param);
+                                   ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:78:8: note:   because the following virtual functions are pure within ‘caffe::BNLayer<float>’:
+  class BNLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:191:38: error: cannot allocate an object of abstract type ‘caffe::BNLLLayer<float>’
+     return new BNLLLayer<Dtype>(param);
+                                      ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:111:7: note:   because the following virtual functions are pure within ‘caffe::BNLLLayer<float>’:
+ class BNLLLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:193:45: error: cannot allocate an object of abstract type ‘caffe::CompactDataLayer<float>’
+     return new CompactDataLayer<Dtype>(param);
+                                             ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:305:7: note:   because the following virtual functions are pure within ‘caffe::CompactDataLayer<float>’:
+ class CompactDataLayer : public BasePrefetchingDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:195:40: error: cannot allocate an object of abstract type ‘caffe::ConcatLayer<float>’
+     return new ConcatLayer<Dtype>(param);
+                                        ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:130:8: note:   because the following virtual functions are pure within ‘caffe::ConcatLayer<float>’:
+  class ConcatLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:199:38: error: cannot allocate an object of abstract type ‘caffe::DataLayer<float>’
+     return new DataLayer<Dtype>(param);
+                                      ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:96:7: note:   because the following virtual functions are pure within ‘caffe::DataLayer<float>’:
+ class DataLayer : public BasePrefetchingDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:201:41: error: cannot allocate an object of abstract type ‘caffe::DropoutLayer<float>’
+     return new DropoutLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:161:7: note:   because the following virtual functions are pure within ‘caffe::DropoutLayer<float>’:
+ class DropoutLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:203:43: error: cannot allocate an object of abstract type ‘caffe::DummyDataLayer<float>’
+     return new DummyDataLayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:131:7: note:   because the following virtual functions are pure within ‘caffe::DummyDataLayer<float>’:
+ class DummyDataLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:205:47: error: cannot allocate an object of abstract type ‘caffe::EuclideanLossLayer<float>’
+     return new EuclideanLossLayer<Dtype>(param);
+                                               ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:147:7: note:   because the following virtual functions are pure within ‘caffe::EuclideanLossLayer<float>’:
+ class EuclideanLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:207:41: error: cannot allocate an object of abstract type ‘caffe::EltwiseLayer<float>’
+     return new EltwiseLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:208:8: note:   because the following virtual functions are pure within ‘caffe::EltwiseLayer<float>’:
+  class EltwiseLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:209:41: error: cannot allocate an object of abstract type ‘caffe::FlattenLayer<float>’
+     return new FlattenLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:249:8: note:   because the following virtual functions are pure within ‘caffe::FlattenLayer<float>’:
+  class FlattenLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:211:42: error: cannot allocate an object of abstract type ‘caffe::HDF5DataLayer<float>’
+     return new HDF5DataLayer<Dtype>(param);
+                                          ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:162:7: note:   because the following virtual functions are pure within ‘caffe::HDF5DataLayer<float>’:
+ class HDF5DataLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:213:44: error: cannot allocate an object of abstract type ‘caffe::HDF5OutputLayer<float>’
+     return new HDF5OutputLayer<Dtype>(param);
+                                            ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:201:7: note:   because the following virtual functions are pure within ‘caffe::HDF5OutputLayer<float>’:
+ class HDF5OutputLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:215:43: error: cannot allocate an object of abstract type ‘caffe::HingeLossLayer<float>’
+     return new HingeLossLayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:258:7: note:   because the following virtual functions are pure within ‘caffe::HingeLossLayer<float>’:
+ class HingeLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:217:43: error: cannot allocate an object of abstract type ‘caffe::ImageDataLayer<float>’
+     return new ImageDataLayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:240:7: note:   because the following virtual functions are pure within ‘caffe::ImageDataLayer<float>’:
+ class ImageDataLayer : public BasePrefetchingDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:219:40: error: cannot allocate an object of abstract type ‘caffe::Im2colLayer<float>’
+     return new Im2colLayer<Dtype>(param);
+                                        ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:104:7: note:   because the following virtual functions are pure within ‘caffe::Im2colLayer<float>’:
+ class Im2colLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:221:46: error: cannot allocate an object of abstract type ‘caffe::InfogainLossLayer<float>’
+     return new InfogainLossLayer<Dtype>(param);
+                                              ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:336:7: note:   because the following virtual functions are pure within ‘caffe::InfogainLossLayer<float>’:
+ class InfogainLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:223:46: error: cannot allocate an object of abstract type ‘caffe::InnerProductLayer<float>’
+     return new InnerProductLayer<Dtype>(param);
+                                              ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:300:8: note:   because the following virtual functions are pure within ‘caffe::InnerProductLayer<float>’:
+  class InnerProductLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:225:37: error: cannot allocate an object of abstract type ‘caffe::LRNLayer<float>’
+     return new LRNLayer<Dtype>(param);
+                                     ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:144:7: note:   because the following virtual functions are pure within ‘caffe::LRNLayer<float>’:
+ class LRNLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:227:44: error: cannot allocate an object of abstract type ‘caffe::MemoryDataLayer<float>’
+     return new MemoryDataLayer<Dtype>(param);
+                                            ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:269:7: note:   because the following virtual functions are pure within ‘caffe::MemoryDataLayer<float>’:
+ class MemoryDataLayer : public BaseDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:229:34: error: cannot allocate an object of abstract type ‘caffe::MVNLayer<float>’
+  return new MVNLayer<Dtype>(param);
+                                  ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:337:8: note:   because the following virtual functions are pure within ‘caffe::MVNLayer<float>’:
+  class MVNLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:231:57: error: cannot allocate an object of abstract type ‘caffe::MultinomialLogisticLossLayer<float>’
+     return new MultinomialLogisticLossLayer<Dtype>(param);
+                                                         ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:427:7: note:   because the following virtual functions are pure within ‘caffe::MultinomialLogisticLossLayer<float>’:
+ class MultinomialLogisticLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:235:39: error: cannot allocate an object of abstract type ‘caffe::PowerLayer<float>’
+     return new PowerLayer<Dtype>(param);
+                                       ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:219:7: note:   because the following virtual functions are pure within ‘caffe::PowerLayer<float>’:
+ class PowerLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:237:36: error: cannot allocate an object of abstract type ‘caffe::PReLULayer<float>’
+  return new PReLULayer<Dtype>(param);
+                                    ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:609:7: note:   because the following virtual functions are pure within ‘caffe::PReLULayer<float>’:
+ class PReLULayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:241:41: error: cannot allocate an object of abstract type ‘caffe::SilenceLayer<float>’
+     return new SilenceLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:371:8: note:   because the following virtual functions are pure within ‘caffe::SilenceLayer<float>’:
+  class SilenceLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:245:57: error: cannot allocate an object of abstract type ‘caffe::SigmoidCrossEntropyLossLayer<float>’
+     return new SigmoidCrossEntropyLossLayer<Dtype>(param);
+                                                         ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:505:7: note:   because the following virtual functions are pure within ‘caffe::SigmoidCrossEntropyLossLayer<float>’:
+ class SigmoidCrossEntropyLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:247:39: error: cannot allocate an object of abstract type ‘caffe::SliceLayer<float>’
+     return new SliceLayer<Dtype>(param);
+                                       ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:498:8: note:   because the following virtual functions are pure within ‘caffe::SliceLayer<float>’:
+  class SliceLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:251:49: error: cannot allocate an object of abstract type ‘caffe::SoftmaxWithLossLayer<float>’
+     return new SoftmaxWithLossLayer<Dtype>(param);
+                                                 ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:602:7: note:   because the following virtual functions are pure within ‘caffe::SoftmaxWithLossLayer<float>’:
+ class SoftmaxWithLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:253:39: error: cannot allocate an object of abstract type ‘caffe::SplitLayer<float>’
+     return new SplitLayer<Dtype>(param);
+                                       ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:465:8: note:   because the following virtual functions are pure within ‘caffe::SplitLayer<float>’:
+  class SplitLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:257:44: error: cannot allocate an object of abstract type ‘caffe::WindowDataLayer<float>’
+     return new WindowDataLayer<Dtype>(param);
+                                            ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:343:7: note:   because the following virtual functions are pure within ‘caffe::WindowDataLayer<float>’:
+ class WindowDataLayer : public BasePrefetchingDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = float]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In instantiation of ‘caffe::Layer<Dtype>* caffe::GetLayer(const caffe::LayerParameter&) [with Dtype = double]’:
+src/caffe/layer_factory.cpp:268:61:   required from here
+src/caffe/layer_factory.cpp:183:42: error: cannot allocate an object of abstract type ‘caffe::AccuracyLayer<double>’
+     return new AccuracyLayer<Dtype>(param);
+                                          ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:23:7: note:   because the following virtual functions are pure within ‘caffe::AccuracyLayer<double>’:
+ class AccuracyLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:185:40: error: cannot allocate an object of abstract type ‘caffe::AbsValLayer<double>’
+     return new AbsValLayer<Dtype>(param);
+                                        ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:50:7: note:   because the following virtual functions are pure within ‘caffe::AbsValLayer<double>’:
+ class AbsValLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:187:40: error: cannot allocate an object of abstract type ‘caffe::ArgMaxLayer<double>’
+     return new ArgMaxLayer<Dtype>(param);
+                                        ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:29:8: note:   because the following virtual functions are pure within ‘caffe::ArgMaxLayer<double>’:
+  class ArgMaxLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:189:35: error: cannot allocate an object of abstract type ‘caffe::BNLayer<double>’
+    return new BNLayer<Dtype>(param);
+                                   ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:78:8: note:   because the following virtual functions are pure within ‘caffe::BNLayer<double>’:
+  class BNLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:191:38: error: cannot allocate an object of abstract type ‘caffe::BNLLLayer<double>’
+     return new BNLLLayer<Dtype>(param);
+                                      ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:111:7: note:   because the following virtual functions are pure within ‘caffe::BNLLLayer<double>’:
+ class BNLLLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:193:45: error: cannot allocate an object of abstract type ‘caffe::CompactDataLayer<double>’
+     return new CompactDataLayer<Dtype>(param);
+                                             ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:305:7: note:   because the following virtual functions are pure within ‘caffe::CompactDataLayer<double>’:
+ class CompactDataLayer : public BasePrefetchingDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:195:40: error: cannot allocate an object of abstract type ‘caffe::ConcatLayer<double>’
+     return new ConcatLayer<Dtype>(param);
+                                        ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:130:8: note:   because the following virtual functions are pure within ‘caffe::ConcatLayer<double>’:
+  class ConcatLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:199:38: error: cannot allocate an object of abstract type ‘caffe::DataLayer<double>’
+     return new DataLayer<Dtype>(param);
+                                      ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:96:7: note:   because the following virtual functions are pure within ‘caffe::DataLayer<double>’:
+ class DataLayer : public BasePrefetchingDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:201:41: error: cannot allocate an object of abstract type ‘caffe::DropoutLayer<double>’
+     return new DropoutLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:161:7: note:   because the following virtual functions are pure within ‘caffe::DropoutLayer<double>’:
+ class DropoutLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:203:43: error: cannot allocate an object of abstract type ‘caffe::DummyDataLayer<double>’
+     return new DummyDataLayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:131:7: note:   because the following virtual functions are pure within ‘caffe::DummyDataLayer<double>’:
+ class DummyDataLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:205:47: error: cannot allocate an object of abstract type ‘caffe::EuclideanLossLayer<double>’
+     return new EuclideanLossLayer<Dtype>(param);
+                                               ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:147:7: note:   because the following virtual functions are pure within ‘caffe::EuclideanLossLayer<double>’:
+ class EuclideanLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:207:41: error: cannot allocate an object of abstract type ‘caffe::EltwiseLayer<double>’
+     return new EltwiseLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:208:8: note:   because the following virtual functions are pure within ‘caffe::EltwiseLayer<double>’:
+  class EltwiseLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:209:41: error: cannot allocate an object of abstract type ‘caffe::FlattenLayer<double>’
+     return new FlattenLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:249:8: note:   because the following virtual functions are pure within ‘caffe::FlattenLayer<double>’:
+  class FlattenLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:211:42: error: cannot allocate an object of abstract type ‘caffe::HDF5DataLayer<double>’
+     return new HDF5DataLayer<Dtype>(param);
+                                          ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:162:7: note:   because the following virtual functions are pure within ‘caffe::HDF5DataLayer<double>’:
+ class HDF5DataLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:213:44: error: cannot allocate an object of abstract type ‘caffe::HDF5OutputLayer<double>’
+     return new HDF5OutputLayer<Dtype>(param);
+                                            ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:201:7: note:   because the following virtual functions are pure within ‘caffe::HDF5OutputLayer<double>’:
+ class HDF5OutputLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:215:43: error: cannot allocate an object of abstract type ‘caffe::HingeLossLayer<double>’
+     return new HingeLossLayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:258:7: note:   because the following virtual functions are pure within ‘caffe::HingeLossLayer<double>’:
+ class HingeLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:217:43: error: cannot allocate an object of abstract type ‘caffe::ImageDataLayer<double>’
+     return new ImageDataLayer<Dtype>(param);
+                                           ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:240:7: note:   because the following virtual functions are pure within ‘caffe::ImageDataLayer<double>’:
+ class ImageDataLayer : public BasePrefetchingDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:219:40: error: cannot allocate an object of abstract type ‘caffe::Im2colLayer<double>’
+     return new Im2colLayer<Dtype>(param);
+                                        ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:104:7: note:   because the following virtual functions are pure within ‘caffe::Im2colLayer<double>’:
+ class Im2colLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:221:46: error: cannot allocate an object of abstract type ‘caffe::InfogainLossLayer<double>’
+     return new InfogainLossLayer<Dtype>(param);
+                                              ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:336:7: note:   because the following virtual functions are pure within ‘caffe::InfogainLossLayer<double>’:
+ class InfogainLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:223:46: error: cannot allocate an object of abstract type ‘caffe::InnerProductLayer<double>’
+     return new InnerProductLayer<Dtype>(param);
+                                              ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:300:8: note:   because the following virtual functions are pure within ‘caffe::InnerProductLayer<double>’:
+  class InnerProductLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:225:37: error: cannot allocate an object of abstract type ‘caffe::LRNLayer<double>’
+     return new LRNLayer<Dtype>(param);
+                                     ^
+In file included from src/caffe/layer_factory.cpp:5:0:
+./include/caffe/vision_layers.hpp:144:7: note:   because the following virtual functions are pure within ‘caffe::LRNLayer<double>’:
+ class LRNLayer : public Layer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:227:44: error: cannot allocate an object of abstract type ‘caffe::MemoryDataLayer<double>’
+     return new MemoryDataLayer<Dtype>(param);
+                                            ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:269:7: note:   because the following virtual functions are pure within ‘caffe::MemoryDataLayer<double>’:
+ class MemoryDataLayer : public BaseDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:229:34: error: cannot allocate an object of abstract type ‘caffe::MVNLayer<double>’
+  return new MVNLayer<Dtype>(param);
+                                  ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:337:8: note:   because the following virtual functions are pure within ‘caffe::MVNLayer<double>’:
+  class MVNLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:231:57: error: cannot allocate an object of abstract type ‘caffe::MultinomialLogisticLossLayer<double>’
+     return new MultinomialLogisticLossLayer<Dtype>(param);
+                                                         ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:427:7: note:   because the following virtual functions are pure within ‘caffe::MultinomialLogisticLossLayer<double>’:
+ class MultinomialLogisticLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:235:39: error: cannot allocate an object of abstract type ‘caffe::PowerLayer<double>’
+     return new PowerLayer<Dtype>(param);
+                                       ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:219:7: note:   because the following virtual functions are pure within ‘caffe::PowerLayer<double>’:
+ class PowerLayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:237:36: error: cannot allocate an object of abstract type ‘caffe::PReLULayer<double>’
+  return new PReLULayer<Dtype>(param);
+                                    ^
+In file included from ./include/caffe/loss_layers.hpp:11:0,
+                 from ./include/caffe/common_layers.hpp:12,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/neuron_layers.hpp:609:7: note:   because the following virtual functions are pure within ‘caffe::PReLULayer<double>’:
+ class PReLULayer : public NeuronLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:241:41: error: cannot allocate an object of abstract type ‘caffe::SilenceLayer<double>’
+     return new SilenceLayer<Dtype>(param);
+                                         ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:371:8: note:   because the following virtual functions are pure within ‘caffe::SilenceLayer<double>’:
+  class SilenceLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:245:57: error: cannot allocate an object of abstract type ‘caffe::SigmoidCrossEntropyLossLayer<double>’
+     return new SigmoidCrossEntropyLossLayer<Dtype>(param);
+                                                         ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:505:7: note:   because the following virtual functions are pure within ‘caffe::SigmoidCrossEntropyLossLayer<double>’:
+ class SigmoidCrossEntropyLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:247:39: error: cannot allocate an object of abstract type ‘caffe::SliceLayer<double>’
+     return new SliceLayer<Dtype>(param);
+                                       ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:498:8: note:   because the following virtual functions are pure within ‘caffe::SliceLayer<double>’:
+  class SliceLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:251:49: error: cannot allocate an object of abstract type ‘caffe::SoftmaxWithLossLayer<double>’
+     return new SoftmaxWithLossLayer<Dtype>(param);
+                                                 ^
+In file included from ./include/caffe/common_layers.hpp:12:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/loss_layers.hpp:602:7: note:   because the following virtual functions are pure within ‘caffe::SoftmaxWithLossLayer<double>’:
+ class SoftmaxWithLossLayer : public LossLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:253:39: error: cannot allocate an object of abstract type ‘caffe::SplitLayer<double>’
+     return new SplitLayer<Dtype>(param);
+                                       ^
+In file included from ./include/caffe/vision_layers.hpp:10:0,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/common_layers.hpp:465:8: note:   because the following virtual functions are pure within ‘caffe::SplitLayer<double>’:
+  class SplitLayer : public Layer<Dtype> {
+        ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp:257:44: error: cannot allocate an object of abstract type ‘caffe::WindowDataLayer<double>’
+     return new WindowDataLayer<Dtype>(param);
+                                            ^
+In file included from ./include/caffe/common_layers.hpp:10:0,
+                 from ./include/caffe/vision_layers.hpp:10,
+                 from src/caffe/layer_factory.cpp:5:
+./include/caffe/data_layers.hpp:343:7: note:   because the following virtual functions are pure within ‘caffe::WindowDataLayer<double>’:
+ class WindowDataLayer : public BasePrefetchingDataLayer<Dtype> {
+       ^
+In file included from src/caffe/layer_factory.cpp:3:0:
+./include/caffe/layer.hpp:97:16: note: 	void caffe::Layer<Dtype>::Reshape(const std::vector<caffe::Blob<Dtype>*>&, std::vector<caffe::Blob<Dtype>*>*) [with Dtype = double]
+   virtual void Reshape(const vector<Blob<Dtype>*>& bottom,
+                ^
+src/caffe/layer_factory.cpp: In function ‘caffe::ConvolutionLayer<Dtype>* caffe::GetConvolutionLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:32:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::ConvolutionLayer<Dtype>* caffe::GetConvolutionLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:32:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::PoolingLayer<Dtype>* caffe::GetPoolingLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:59:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::PoolingLayer<Dtype>* caffe::GetPoolingLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:59:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::ReLULayer<Dtype>* caffe::GetReLULayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:86:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::ReLULayer<Dtype>* caffe::GetReLULayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:86:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::SigmoidLayer<Dtype>* caffe::GetSigmoidLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:113:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::SigmoidLayer<Dtype>* caffe::GetSigmoidLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:113:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::TanHLayer<Dtype>* caffe::GetTanHLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:140:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::TanHLayer<Dtype>* caffe::GetTanHLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:140:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::SoftmaxLayer<Dtype>* caffe::GetSoftmaxLayer(const string&, const caffe::LayerParameter&) [with Dtype = float; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+src/caffe/layer_factory.cpp: In function ‘caffe::SoftmaxLayer<Dtype>* caffe::GetSoftmaxLayer(const string&, const caffe::LayerParameter&) [with Dtype = double; std::string = std::basic_string<char>]’:
+src/caffe/layer_factory.cpp:167:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
