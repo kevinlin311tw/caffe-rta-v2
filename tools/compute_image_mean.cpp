@@ -83,6 +83,7 @@ int main(int argc, char** argv) {
   sum_blob.set_channels(datum.channels());
   sum_blob.set_height(datum.height());
   sum_blob.set_width(datum.width());
+  LOG(ERROR) << "channels=" << datum.channels() << " height=" << datum.height() << "width=" << datum.width();
   const int data_size = datum.channels() * datum.height() * datum.width();
   int size_in_datum = std::max<int>(datum.data().size(),
                                     datum.float_data_size());
@@ -123,8 +124,8 @@ int main(int argc, char** argv) {
       const string& data = datum.data();
       size_in_datum = std::max<int>(datum.data().size(),
           datum.float_data_size());
-      CHECK_EQ(size_in_datum, data_size) << "Incorrect data field size " <<
-          size_in_datum;
+      CHECK_EQ(size_in_datum, data_size) << "Incorrect data field size:" <<
+          size_in_datum << "   data_size:"<<data_size;
       if (data.size() != 0) {
         for (int i = 0; i < size_in_datum; ++i) {
           sum_blob.set_data(i, sum_blob.data(i) + (uint8_t)data[i]);
